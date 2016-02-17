@@ -58,11 +58,11 @@ ENV DATE_TIMEZONE UTC
 ENV TERM dumb
 
 COPY index.php /var/www/html/
-COPY run-lap.sh /usr/sbin/
+COPY run-lamp.sh /usr/sbin/
 
 RUN a2enmod rewrite
 RUN ln -s /usr/bin/nodejs /usr/bin/node
-RUN chmod +x /usr/sbin/run-lap.sh
+RUN chmod +x /usr/sbin/run-lamp.sh
 RUN chown -R www-data:www-data /var/www/html
 
 VOLUME /var/www/html
@@ -73,4 +73,4 @@ VOLUME /var/log/mysql
 EXPOSE 80
 EXPOSE 3306
 
-CMD ["/usr/sbin/run-lap.sh"]
+CMD ["/usr/sbin/run-lamp.sh"]
