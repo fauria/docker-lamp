@@ -62,6 +62,7 @@ COPY run-lap.sh /usr/sbin/
 
 RUN chmod +x /usr/sbin/run-lap.sh
 RUN chown -R www-data:www-data /var/www/html
+RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 VOLUME /var/www/html
 VOLUME /var/log/httpd
