@@ -46,7 +46,7 @@ Includes the following components:
 	* php-tidy
 	* php-xmlrpc
 	* php-xsl
-* Development tools
+ * Development tools
 	* git
 	* composer
 	* npm / nodejs
