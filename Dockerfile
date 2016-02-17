@@ -61,7 +61,7 @@ COPY index.php /var/www/html/
 COPY run-lap.sh /usr/sbin/
 
 RUN chmod +x /usr/sbin/run-lap.sh
-RUN chown -R apache:apache /var/www/html
+RUN chown -R www-data:www-data /var/www/html
 
 VOLUME /var/www/html
 VOLUME /var/log/httpd
