@@ -8,7 +8,7 @@ LABEL Description="Cutting-edge LAMP stack, based on Ubuntu 16.04 LTS. Includes 
 RUN apt-get update
 RUN apt-get upgrade -y
 
-COPY debconf.selections /tmp
+COPY debconf.selections /tmp/
 RUN debconf-set-selections /tmp/debconf.selections
 
 RUN apt-get install tree vim -y
