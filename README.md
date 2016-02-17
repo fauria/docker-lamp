@@ -3,16 +3,16 @@ fauria/lamp
 
 ![docker_logo](https://googledrive.com/host/0B7q6BLMXak9VfkpQY3YzNldlSmtxRTZCMEtEVlhhR3QtMFc3aEYzVzA5YlM5MWw5OXhqV0U/docker_139x115.png)![docker_fauria_logo](https://googledrive.com/host/0B7q6BLMXak9VfkpQY3YzNldlSmtxRTZCMEtEVlhhR3QtMFc3aEYzVzA5YlM5MWw5OXhqV0U/docker_fauria_161x115.png)
 
-This Docker container implements a latest generation LAMP stack, as well as some popular PHP modules, [Composer](https://getcomposer.org/), [Bower](http://bower.io/) and [npm](https://www.npmjs.com/) package managers and a Postfix service to allow sending emails through PHP [mail()](http://php.net/manual/en/function.mail.php) function.
+This Docker container implements a last generation LAMP stack with a set of popular PHP modules. Includes support for [Composer](https://getcomposer.org/), [Bower](http://bower.io/) and [npm](https://www.npmjs.com/) package managers and a Postfix service to allow sending emails through PHP [mail()](http://php.net/manual/en/function.mail.php) function.
 
-If you dont need support for MySQL, or your app runs on PHP 5.4, maybe [fauria/lap](https://hub.docker.com/r/fauria/lamp) suits your needs better.
+If you dont need support for MySQL/MariaDB, or your app runs on PHP 5.4, maybe [fauria/lap](https://hub.docker.com/r/fauria/lamp) suits your needs better.
 
 Includes the following components:
 
  * Ubuntu 16.04 LTS Xenial Xerus base image.
  * Apache HTTP Server 2.4
- * Postfix 2.11
  * MariaDB 10.0
+ * Postfix 2.11 
  * PHP 7
  * PHP modules
  	* php-bz2
@@ -46,6 +46,16 @@ Includes the following components:
 	* php-tidy
 	* php-xmlrpc
 	* php-xsl
+* Development tools
+	* git
+	* composer
+	* npm / nodejs
+	* bower
+	* vim
+	* tree
+	* nano
+	* ftp
+	* curl
 
 Installation from [Docker registry hub](https://registry.hub.docker.com/u/fauria/lamp/).
 ----
