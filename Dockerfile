@@ -8,8 +8,8 @@ LABEL Description="Cutting-edge LAMP stack, based on Ubuntu 16.04 LTS. Includes 
 RUN apt-get update
 RUN apt-get upgrade -y
 
-RUN debconf-set-selections <<< "postfix postfix/mailname string localhost"
-RUN debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Docker Postfix'"
+COPY debconf.selections /tmp
+RUN debconf-set-selections /tmp/debconf.selections
 
 RUN apt-get install tree vim -y
 RUN apt-get install -y \
