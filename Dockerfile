@@ -48,7 +48,7 @@ RUN apt-get install -y \
 RUN apt-get install apache2 libapache2-mod-php7.0 -y
 RUN apt-get install mariadb-common mariadb-server mariadb-client -y
 RUN apt-get install postfix -y
-RUN apt-get install composer npm -y
+RUN apt-get install git nodejs npm composer -y
 RUN npm install -g bower grunt-cli gulp
 
 ENV LOG_STDOUT **Boolean**
@@ -56,13 +56,15 @@ ENV LOG_STDERR **Boolean**
 ENV LOG_LEVEL warn
 ENV ALLOW_OVERRIDE All
 ENV DATE_TIMEZONE UTC
+ENV TERM dumb
 
 COPY index.php /var/www/html/
 COPY run-lap.sh /usr/sbin/
 
+RUN a2enmod rewrite
+RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN chmod +x /usr/sbin/run-lap.sh
 RUN chown -R www-data:www-data /var/www/html
-RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 VOLUME /var/www/html
 VOLUME /var/log/httpd

@@ -56,7 +56,7 @@ fi
 /usr/sbin/postfix start
 
 # Run MariaDB
-/usr/bin/mysqld_safe --timezone=${DATE_TIMEZONE}
+/usr/bin/mysqld_safe --timezone=${DATE_TIMEZONE}&
 
 # Run Apache:
 if [ $LOG_LEVEL == 'debug' ]; then
