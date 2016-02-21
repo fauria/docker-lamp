@@ -110,7 +110,7 @@ This image uses environment variables to allow the configuration of some paramet
 * Variable name: TERM
 * Default value: dumb
 * Accepted values: dumb
-* Description: Allow usage of terminal programs inside the container, such as `mysqldmin` or `nano`.
+* Description: Allow usage of terminal programs inside the container, such as `mysql` or `nano`.
 
 Exposed port and volumnes
 ----
