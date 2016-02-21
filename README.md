@@ -128,25 +128,25 @@ The user and group owner id for the DocumentRoot directory `/var/www/html` are b
 Use cases
 ----
 
-1. Create a temporary container for testing purposes:
+#### Create a temporary container for testing purposes:
  
 ```
 	docker run --rm fauria/lamp
 ```
 
-2. Create a temporary container to debug a web app:
+#### Create a temporary container to debug a web app:
  
 ```
 	docker run --rm -p 8080:80 -e LOG_STDOUT=true -e LOG_STDERR=true -e LOG_LEVEL=debug -v /my/data/directory:/var/www/html fauria/lamp
 ```
 
-3. Create a container linking to another [MySQL container](https://registry.hub.docker.com/_/mysql/):
+#### Create a container linking to another [MySQL container](https://registry.hub.docker.com/_/mysql/):
 
 ```
 	docker run -d --link my-mysql-container:mysql -p 8080:80 -v /my/data/directory:/var/www/html -v /my/logs/directory:/var/log/httpd --name my-lamp-container fauria/lamp
 ```
 
-4. Get inside a running container and open a MariaDB console:
+#### Get inside a running container and open a MariaDB console:
 
 ```
 	docker exec -i -t my-lamp-container bash
