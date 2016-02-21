@@ -105,6 +105,13 @@ This image uses environment variables to allow the configuration of some paramet
 * Accepted values: Any of PHP's [supported timezones](http://php.net/manual/en/timezones.php)
 * Description: Set php.ini default date.timezone directive and sets MariaDB as well.
 
+----
+
+* Variable name: TERM
+* Default value: dumb
+* Accepted values: dumb
+* Description: Allow usage of terminal programs inside the container, such as `mysqldmin` or `nano`.
+
 Exposed port and volumnes
 ----
 
