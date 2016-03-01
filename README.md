@@ -105,6 +105,13 @@ This image uses environment variables to allow the configuration of some paramet
 * Accepted values: Any of PHP's [supported timezones](http://php.net/manual/en/timezones.php)
 * Description: Set php.ini default date.timezone directive and sets MariaDB as well.
 
+----
+
+* Variable name: TERM
+* Default value: dumb
+* Accepted values: dumb
+* Description: Allow usage of terminal programs inside the container, such as `mysql` or `nano`.
+
 Exposed port and volumnes
 ----
 
@@ -123,25 +130,25 @@ The user and group owner id for the MariaDB directory `/var/log/mysql` are 105 a
 Use cases
 ----
 
-1. Create an interactive temporary container for testing purposes:
+#### Create a temporary container for testing purposes:
  
 ```
 	docker run -i -t --rm fauria/lamp bash
 ```
 
-2. Create a temporary container to debug a web app:
+#### Create a temporary container to debug a web app:
  
 ```
 	docker run --rm -p 8080:80 -e LOG_STDOUT=true -e LOG_STDERR=true -e LOG_LEVEL=debug -v /my/data/directory:/var/www/html fauria/lamp
 ```
 
-3. Create a container linking to another [MySQL container](https://registry.hub.docker.com/_/mysql/):
+#### Create a container linking to another [MySQL container](https://registry.hub.docker.com/_/mysql/):
 
 ```
 	docker run -d --link my-mysql-container:mysql -p 8080:80 -v /my/data/directory:/var/www/html -v /my/logs/directory:/var/log/httpd --name my-lamp-container fauria/lamp
 ```
 
-4. Get inside a running container and open a MariaDB console:
+#### Get inside a running container and open a MariaDB console:
 
 ```
 	docker exec -i -t my-lamp-container bash
