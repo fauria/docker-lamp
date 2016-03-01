@@ -118,13 +118,15 @@ The image exposes ports `80` and `3306`, and exports four volumes:
 
 The user and group owner id for the DocumentRoot directory `/var/www/html` are both 33 (`uid=33(www-data) gid=33(www-data) groups=33(www-data)`).
 
+The user and group owner id for the MariaDB directory `/var/log/mysql` are 105 and 108 repectively (`uid=105(mysql) gid=108(mysql) groups=108(mysql)`).
+
 Use cases
 ----
 
-1. Create a temporary container for testing purposes:
+1. Create an interactive temporary container for testing purposes:
  
 ```
-	docker run --rm fauria/lamp
+	docker run -i -t --rm fauria/lamp bash
 ```
 
 2. Create a temporary container to debug a web app:

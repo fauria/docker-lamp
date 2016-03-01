@@ -18,11 +18,11 @@ else
 fi
 
 if [ $ALLOW_OVERRIDE == 'All' ]; then
-    /bin/sed -i 's/AllowOverride\ None/AllowOverride\ All/g' /etc/httpd/conf/httpd.conf
+    /bin/sed -i 's/AllowOverride\ None/AllowOverride\ All/g' /etc/apache2/apache2.conf
 fi
 
 if [ $LOG_LEVEL != 'warn' ]; then
-    /bin/sed -i "s/LogLevel\ warn/LogLevel\ ${LOG_LEVEL}/g" /etc/httpd/conf/httpd.conf
+    /bin/sed -i "s/LogLevel\ warn/LogLevel\ ${LOG_LEVEL}/g" /etc/apache2/apache2.conf
 fi
 
 # stdout server info:
