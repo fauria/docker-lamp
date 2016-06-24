@@ -112,7 +112,7 @@ This image uses environment variables to allow the configuration of some paramet
 * Accepted values: dumb
 * Description: Allow usage of terminal programs inside the container, such as `mysql` or `nano`.
 
-Exposed port and volumnes
+Exposed port and volumes
 ----
 
 The image exposes ports `80` and `3306`, and exports four volumes: 
