@@ -1,7 +1,7 @@
 fauria/lamp
 ==========
 
-![docker_logo](https://github.com/fauria/docker-lamp/blob/master/docker_139x115.png)![docker_fauria_logo](https://github.com/fauria/docker-lamp/blob/master/docker_fauria_161x115.png)
+![docker_logo](https://raw.githubusercontent.com/fauria/docker-lamp/master/docker_139x115.png)![docker_fauria_logo](https://raw.githubusercontent.com/fauria/docker-lamp/master/docker_fauria_161x115.png)
 
 This Docker container implements a last generation LAMP stack with a set of popular PHP modules. Includes support for [Composer](https://getcomposer.org/), [Bower](http://bower.io/) and [npm](https://www.npmjs.com/) package managers and a Postfix service to allow sending emails through PHP [mail()](http://php.net/manual/en/function.mail.php) function.
 
@@ -12,7 +12,7 @@ Includes the following components:
  * Ubuntu 16.04 LTS Xenial Xerus base image.
  * Apache HTTP Server 2.4
  * MariaDB 10.0
- * Postfix 2.11 
+ * Postfix 2.11
  * PHP 7
  * PHP modules
  	* php-bz2
@@ -115,11 +115,11 @@ This image uses environment variables to allow the configuration of some paramet
 Exposed port and volumnes
 ----
 
-The image exposes ports `80` and `3306`, and exports four volumes: 
+The image exposes ports `80` and `3306`, and exports four volumes:
 
 * `/var/log/httpd`, containing Apache log files.
 * `/var/log/mysql` containing MariaDB log files.
-* `/var/www/html`, used as Apache's [DocumentRoot directory](http://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot). 
+* `/var/www/html`, used as Apache's [DocumentRoot directory](http://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot).
 * `/var/lib/mysql`, where MariaDB data files are stores.
 
 
@@ -131,13 +131,13 @@ Use cases
 ----
 
 #### Create a temporary container for testing purposes:
- 
+
 ```
 	docker run -i -t --rm fauria/lamp bash
 ```
 
 #### Create a temporary container to debug a web app:
- 
+
 ```
 	docker run --rm -p 8080:80 -e LOG_STDOUT=true -e LOG_STDERR=true -e LOG_LEVEL=debug -v /my/data/directory:/var/www/html fauria/lamp
 ```
@@ -152,5 +152,5 @@ Use cases
 
 ```
 	docker exec -i -t my-lamp-container bash
-	mysql -u root	
+	mysql -u root
 ```
