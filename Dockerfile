@@ -68,6 +68,7 @@ VOLUME /var/www/html
 VOLUME /var/log/httpd
 VOLUME /var/lib/mysql
 VOLUME /var/log/mysql
+VOLUME /etc/apache2
 
 EXPOSE 80
 EXPOSE 3306
