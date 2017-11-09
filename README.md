@@ -1,11 +1,11 @@
-fauria/lamp
+unixelias/lamp
 ==========
 
-![docker_logo](https://raw.githubusercontent.com/fauria/docker-lamp/master/docker_139x115.png)![docker_fauria_logo](https://raw.githubusercontent.com/fauria/docker-lamp/master/docker_fauria_161x115.png)
+![docker_logo](https://raw.githubusercontent.com/unixelias/docker-lamp/master/docker_139x115.png)
 
 This Docker container implements a last generation LAMP stack with a set of popular PHP modules. Includes support for [Composer](https://getcomposer.org/), [Bower](http://bower.io/) and [npm](https://www.npmjs.com/) package managers and a Postfix service to allow sending emails through PHP [mail()](http://php.net/manual/en/function.mail.php) function.
 
-If you dont need support for MySQL/MariaDB, or your app runs on PHP 5.4, maybe [fauria/lap](https://hub.docker.com/r/fauria/lamp) suits your needs better.
+If you dont need support for MySQL/MariaDB, or your app runs on PHP 5.4, maybe [unixelias/lamp](https://hub.docker.com/r/unixelias/lamp) suits your needs better.
 
 Includes the following components:
 
@@ -57,13 +57,13 @@ Includes the following components:
 	* ftp
 	* curl
 
-Installation from [Docker registry hub](https://registry.hub.docker.com/u/fauria/lamp/).
+Installation from [Docker registry hub](https://registry.hub.docker.com/u/unixelias/lamp/).
 ----
 
 You can download the image using the following command:
 
 ```bash
-docker pull fauria/lamp
+docker pull unixelias/lamp
 ```
 
 Environment variables
@@ -133,19 +133,19 @@ Use cases
 #### Create a temporary container for testing purposes:
 
 ```
-	docker run -i -t --rm fauria/lamp bash
+	docker run -i -t --rm unixelias/lamp bash
 ```
 
 #### Create a temporary container to debug a web app:
 
 ```
-	docker run --rm -p 8080:80 -e LOG_STDOUT=true -e LOG_STDERR=true -e LOG_LEVEL=debug -v /my/data/directory:/var/www/html fauria/lamp
+	docker run --rm -p 8080:80 -e LOG_STDOUT=true -e LOG_STDERR=true -e LOG_LEVEL=debug -v /my/data/directory:/var/www/html unixelias/lamp
 ```
 
 #### Create a container linking to another [MySQL container](https://registry.hub.docker.com/_/mysql/):
 
 ```
-	docker run -d --link my-mysql-container:mysql -p 8080:80 -v /my/data/directory:/var/www/html -v /my/logs/directory:/var/log/httpd --name my-lamp-container fauria/lamp
+	docker run -d --link my-mysql-container:mysql -p 8080:80 -v /my/data/directory:/var/www/html -v /my/logs/directory:/var/log/httpd --name my-lamp-container unixelias/lamp
 ```
 
 #### Get inside a running container and open a MariaDB console:

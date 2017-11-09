@@ -1,0 +1,29 @@
+version: "2"
+services:
+  postgres:
+    image: unixelias/postgres-dspace:9.6-ptbr
+    hostname: postgres
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  dspace:
+    image: unixelias/docker-dspace:6.0-dev
+    # If you wanto to change the configuration you can build again
+    # and add custom config files
+    #build: ./dspace
+    ports:
+      - 80:8080
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_DB_HOST=postgres
+      - POSTGRES_ADMIN_USER=postgres
+      - POSTGRES_ADMIN_PASSWORD=postgres
+      - POSTGRES_SCHEMA=dspace
+      - POSTGRES_USER=dspace
+      - POSTGRES_PASSWORD=password
+    command: start-dspace
+
+volumes:
+  db_data:
