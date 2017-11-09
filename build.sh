@@ -10,4 +10,4 @@ for i in $( ls docker); do
         && docker push unixelias/lamp:$i ;;
   esac
 done
-#docker tag unixelias/lamp:16.04 unixelias/lamp:latest && docker push unixelias/lamp:latest
+docker tag unixelias/lamp:16.04 unixelias/lamp:latest && docker push unixelias/lamp:latest
