@@ -6,7 +6,7 @@ ARG BUILD_DATE
 ARG VCS_REF
 
 LABEL Name="Lamp Develop Server" \
-      Version="16.10" \
+      Version="16.04" \
       Architecture="x86_64" \
 			License="Apache License 2.0" \
       Dockerfile_location="/root/buildinfo" \
@@ -17,7 +17,7 @@ LABEL Name="Lamp Develop Server" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.vcs-url="https://github.com/unixelias/docker-lamp" \
       org.label-schema.vendor="Elias Alves at UFVJM" \
-      org.label-schema.version="16.10" \
+      org.label-schema.version="16.04" \
       org.label-schema.version="0.1" \
       org.label-schema.version="dev" \
       org.label-schema.schema-version="1.0" \
