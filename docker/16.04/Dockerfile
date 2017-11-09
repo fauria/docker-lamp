@@ -44,8 +44,6 @@ RUN apt-get update \
 	nodejs \
 	npm \
 	postfix \
-	php-mbstring \
-	php-gettext \
 	php7.0-bz2 \
 	php7.0-cgi \
 	php7.0-cli \
@@ -76,7 +74,6 @@ RUN apt-get update \
 	php7.0-tidy \
 	php7.0-xmlrpc \
 	php7.0-xsl \
-	phpmyadmin \
 	tree \
 	vim \
 	&& rm -rf /var/lib/apt/lists/* \
