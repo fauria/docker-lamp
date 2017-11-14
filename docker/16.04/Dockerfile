@@ -27,20 +27,38 @@ COPY Dockerfile /root/buildinfo
 COPY ./scripts/debconf.selections /tmp/
 RUN debconf-set-selections /tmp/debconf.selections
 
+# Install pre dependencies and set locales
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    bzip2 \
+    curl \
+    git \
+    locales \
+    tzdata \
+    unzip \
+    vim \
+    xz-utils \
+    && locale-gen pt en es \
+    && echo "pt_BR pt_BR.UTF-8" >> /etc/locale.alias \
+    && unlink /etc/localtime \
+    && ln -s /usr/share/zoneinfo/Brazil/East /etc/localtime \
+    && dpkg-reconfigure -f noninteractive tzdata \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENV LANG='pt_BR.UTF-8' LANGUAGE='pt_BR:pt:en' LC_ALL='pt_BR.UTF-8'
+
+
 RUN apt-get update \
 	&& apt-get upgrade -y \
 	&& apt-get install -y \
 	apache2 \
 	composer \
-	curl \
 	ftp \
 	php7.0 \
-	git \
 	libapache2-mod-php7.0 \
+  mariadb-server \
 	mariadb-common \
-	mariadb-server \
 	mariadb-client \
-	nano \
 	nodejs \
 	npm \
 	postfix \
@@ -75,9 +93,7 @@ RUN apt-get update \
 	php7.0-xmlrpc \
 	php7.0-xsl \
 	tree \
-	vim \
-	&& rm -rf /var/lib/apt/lists/* \
-  && apt-get clean
+  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g bower grunt-cli gulp
 

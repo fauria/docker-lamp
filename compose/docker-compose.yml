@@ -1,29 +1,39 @@
-version: "2"
+version: '2'
 services:
-  postgres:
-    image: unixelias/postgres-dspace:9.6-ptbr
-    hostname: postgres
-    restart: always
-    volumes:
-      - db_data:/var/lib/postgresql/data
-
-  dspace:
-    image: unixelias/docker-dspace:6.0-dev
-    # If you wanto to change the configuration you can build again
-    # and add custom config files
-    #build: ./dspace
-    ports:
-      - 80:8080
-    depends_on:
-      - postgres
+  db:
+    image: mysql:latest
+    hostname: db
     environment:
-      - POSTGRES_DB_HOST=postgres
-      - POSTGRES_ADMIN_USER=postgres
-      - POSTGRES_ADMIN_PASSWORD=postgres
-      - POSTGRES_SCHEMA=dspace
-      - POSTGRES_USER=dspace
-      - POSTGRES_PASSWORD=password
-    command: start-dspace
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./dump:/docker-entrypoint-initdb.d
+  web:
+    image: unixelias/lamp
+    ports:
+      - 80:80
+    environment:
+      - LOG_STDOUT=true
+      - LOG_STDERR=true
+      - LOG_LEVEL=debug
+    volumes:
+      - ~/workspace:/var/www/html
+    depends_on:
+      - db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    volumes:
+      - phpmyadmin_data:/sessions
+    ports:
+      - 8090:80
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=my-secret-pw
+    depends_on:
+      - db
 
 volumes:
   db_data:
+  phpmyadmin_data:
