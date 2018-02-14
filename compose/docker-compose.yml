@@ -1,15 +1,20 @@
 version: '2'
 services:
   db:
-    image: mysql:latest
-    hostname: db
-    environment:
-      - MYSQL_ROOT_PASSWORD=my-secret-pw
-    volumes:
-      - db_data:/var/lib/mysql
-      - ./dump:/docker-entrypoint-initdb.d
+   image: mariadb
+   hostname: db
+   environment:
+     - MYSQL_ROOT_PASSWORD=my-secret-pw
+     - MYSQL_USER=usuario
+     - MYSQL_PASSWORD=user-secret-pw
+   ports:
+     - 3306:3306
+   volumes:
+     - db_data:/var/lib/mysql
+     - ./demo/dump:/docker-entrypoint-initdb.d
   web:
-    image: unixelias/lamp
+    image: unixelias/lamp:16.04
+    hostname: web
     ports:
       - 80:80
     environment:
@@ -17,12 +22,13 @@ services:
       - LOG_STDERR=true
       - LOG_LEVEL=debug
     volumes:
-      - ~/workspace:/var/www/html
+      - ./demo/code:/var/www/html
     depends_on:
-      - db
+     - db
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    hostname: phpmyadmin
     volumes:
       - phpmyadmin_data:/sessions
     ports:
@@ -33,6 +39,7 @@ services:
       - PMA_PASSWORD=my-secret-pw
     depends_on:
       - db
+      - web
 
 volumes:
   db_data:

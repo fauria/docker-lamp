@@ -3,7 +3,7 @@
 function exportBoolean {
     if [ "${!1}" = "**Boolean**" ]; then
             export ${1}=''
-    else 
+    else
             export ${1}='Yes.'
     fi
 }
@@ -31,13 +31,13 @@ fi
 # stdout server info:
 if [ ! $LOG_STDOUT ]; then
 cat << EOB
-    
-    **********************************************
-    *                                            *
+
+    *************************************************
+    *                                               *
     *    Docker image: unixelias/lamp               *
     *    https://github.com/unixelias/docker-lamp   *
-    *                                            *
-    **********************************************
+    *                                               *
+    *************************************************
 
     SERVER SETTINGS
     ---------------
@@ -57,9 +57,6 @@ fi
 
 # Run Postfix
 /usr/sbin/postfix start
-
-# Run MariaDB
-/usr/bin/mysqld_safe --timezone=${DATE_TIMEZONE}&
 
 # Run Apache:
 if [ $LOG_LEVEL == 'debug' ]; then

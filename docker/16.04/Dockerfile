@@ -5,12 +5,12 @@ MAINTAINER Elias Alves <elias.alves@ufvjm.edu.br>
 ARG BUILD_DATE
 ARG VCS_REF
 
-LABEL Name="Lamp Develop Server" \
+LABEL Name="Develop Server" \
       Version="16.04" \
       Architecture="x86_64" \
 			License="Apache License 2.0" \
       Dockerfile_location="/root/buildinfo" \
-			Usage="docker run -d -p [HOST WWW PORT NUMBER]:80 -p [HOST DB PORT NUMBER]:3306 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql unixelias/lamp" \
+			Usage="docker run -d -p [HOST WWW PORT NUMBER]:80 -p [HOST DB PORT NUMBER]:3000 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql unixelias/lamp" \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Lamp Develop Server" \
       org.label-schema.description="Cutting-edge LAMP stack, based on Ubuntu 16.04 LTS. Includes .htaccess support and popular PHP7 features, including composer and mail() function." \
@@ -23,6 +23,7 @@ LABEL Name="Lamp Develop Server" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.docker.cmd="docker run -d -p [HOST WWW PORT NUMBER]:80 -p [HOST DB PORT NUMBER]:3306 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql unixelias/lamp"
 
+
 COPY Dockerfile /root/buildinfo
 COPY ./scripts/debconf.selections /tmp/
 RUN debconf-set-selections /tmp/debconf.selections
@@ -34,6 +35,8 @@ RUN apt-get update \
     curl \
     git \
     locales \
+	openssl \	
+	perl \
     tzdata \
     unzip \
     vim \
@@ -56,9 +59,6 @@ RUN apt-get update \
 	ftp \
 	php7.0 \
 	libapache2-mod-php7.0 \
-  mariadb-server \
-	mariadb-common \
-	mariadb-client \
 	nodejs \
 	npm \
 	postfix \
@@ -101,7 +101,7 @@ ENV LOG_STDOUT true
 ENV LOG_STDERR true
 ENV LOG_LEVEL warn
 ENV ALLOW_OVERRIDE All
-ENV DATE_TIMEZONE UTC
+ENV DATE_TIMEZONE='America/Sao_Paulo'
 ENV TERM dumb
 
 COPY ./scripts/index.php /var/www/html/
@@ -114,10 +114,9 @@ RUN chown -R www-data:www-data /var/www/html
 
 VOLUME /var/www/html
 VOLUME /var/log/httpd
-VOLUME /var/lib/mysql
-VOLUME /var/log/mysql
 
 EXPOSE 80
-EXPOSE 3306
+EXPOSE 443
+EXPOSE 3000
 
 CMD ["/usr/sbin/run-lamp.sh"]
