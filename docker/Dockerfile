@@ -11,7 +11,7 @@ LABEL Name="Development Web Server Stack" \
       Architecture="x86_64" \
 			License="Apache License 2.0" \
       Dockerfile_location="/root/buildinfo" \
-			Usage="docker run -d -p [HOST WWW PORT NUMBER]:80 -p [HOST DB PORT NUMBER]:443 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql unixelias/lamp" \
+			Usage="docker run -d -p [HOST WWW PORT NUMBER]:80 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql unixelias/lamp" \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Development Web Server Stack" \
       org.label-schema.description="Cutting-edge Web stack, based on Ubuntu 16.04 LTS. Includes .htaccess support and popular PHP7 features, including composer and mail() function." \
@@ -22,7 +22,7 @@ LABEL Name="Development Web Server Stack" \
       org.label-schema.version="0.1" \
       org.label-schema.version="dev" \
       org.label-schema.schema-version="1.0" \
-      org.label-schema.docker.cmd="docker run -d -p [HOST WWW PORT NUMBER]:80 -p [HOST DB PORT NUMBER]:443 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql unixelias/lamp"
+      org.label-schema.docker.cmd="docker run -d -p [HOST WWW PORT NUMBER]:80 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql unixelias/lamp"
 
 
 COPY Dockerfile /root/buildinfo
@@ -95,7 +95,7 @@ RUN apt-get update \
 	tree \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN npm install -g bower grunt-cli gulp
+RUN npm install -g yarn grunt-cli gulp
 
 ENV LOG_STDOUT true
 ENV LOG_STDERR true

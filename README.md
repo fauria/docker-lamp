@@ -3,15 +3,14 @@ unixelias/lamp
 
 ![docker_logo](https://raw.githubusercontent.com/unixelias/docker-lamp/master/docker_139x115.png)
 
-This Docker container implements a last generation LAMP stack with a set of popular PHP modules. Includes support for [Composer](https://getcomposer.org/), [Bower](http://bower.io/) and [npm](https://www.npmjs.com/) package managers and a Postfix service to allow sending emails through PHP [mail()](http://php.net/manual/en/function.mail.php) function.
+This Docker container implements a last generation of LAMP stack with a set of popular PHP modules. Includes support for [Composer](https://getcomposer.org/), [Yarn](http://yarn.io//) and [npm](https://www.npmjs.com/) package managers and a Postfix service to allow sending emails through PHP [mail()](http://php.net/manual/en/function.mail.php) function.
 
-If you dont need support for MySQL/MariaDB, or your app runs on PHP 5.4, maybe [unixelias/lamp](https://hub.docker.com/r/unixelias/lamp) suits your needs better.
+I have made a docker-compose.yml file to show how to use and map additional services like MariaDB, Node.JS and MongoDB. This image still have Node.Js inside, but just for use of npm and library dependecy management. 
 
 Includes the following components:
 
  * Ubuntu 16.04 LTS Xenial Xerus base image.
  * Apache HTTP Server 2.4
- * MariaDB 10.0
  * Postfix 2.11
  * PHP 7
  * PHP modules
@@ -49,8 +48,8 @@ Includes the following components:
  * Development tools
 	* git
 	* composer
-	* npm / nodejs
-	* bower
+	* npm
+	* yarn
 	* vim
 	* tree
 	* nano
@@ -115,17 +114,13 @@ This image uses environment variables to allow the configuration of some paramet
 Exposed port and volumes
 ----
 
-The image exposes ports `80` and `3306`, and exports four volumes:
+The image exposes port `80`, and exports the volumes:
 
 * `/var/log/httpd`, containing Apache log files.
-* `/var/log/mysql` containing MariaDB log files.
 * `/var/www/html`, used as Apache's [DocumentRoot directory](http://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot).
-* `/var/lib/mysql`, where MariaDB data files are stores.
 
 
 The user and group owner id for the DocumentRoot directory `/var/www/html` are both 33 (`uid=33(www-data) gid=33(www-data) groups=33(www-data)`).
-
-The user and group owner id for the MariaDB directory `/var/log/mysql` are 105 and 108 repectively (`uid=105(mysql) gid=108(mysql) groups=108(mysql)`).
 
 Use cases
 ----
