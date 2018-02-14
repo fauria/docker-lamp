@@ -12,11 +12,24 @@ services:
    volumes:
      - db_data:/var/lib/mysql
      - ./demo/dump:/docker-entrypoint-initdb.d
+
+  node:
+    image: "node:carbon"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./demo/app:/home/node/app
+    ports:
+      - 3000:3000
+    command: "npm start"
+
   web:
-    image: unixelias/lamp:16.04
+    image: unixelias/lamp
     hostname: web
     ports:
       - 80:80
+      - 443:443
     environment:
       - LOG_STDOUT=true
       - LOG_STDERR=true
@@ -25,6 +38,7 @@ services:
       - ./demo/code:/var/www/html
     depends_on:
      - db
+     - node
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

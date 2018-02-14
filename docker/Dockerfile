@@ -4,24 +4,25 @@ MAINTAINER Elias Alves <elias.alves@ufvjm.edu.br>
 
 ARG BUILD_DATE
 ARG VCS_REF
+ARG VCS_BRANCH
 
-LABEL Name="Develop Server" \
-      Version="16.04" \
+LABEL Name="Development Web Server Stack" \
+      Version=${VCS_BRANCH} \
       Architecture="x86_64" \
 			License="Apache License 2.0" \
       Dockerfile_location="/root/buildinfo" \
-			Usage="docker run -d -p [HOST WWW PORT NUMBER]:80 -p [HOST DB PORT NUMBER]:3000 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql unixelias/lamp" \
+			Usage="docker run -d -p [HOST WWW PORT NUMBER]:80 -p [HOST DB PORT NUMBER]:443 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql unixelias/lamp" \
       org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.name="Lamp Develop Server" \
-      org.label-schema.description="Cutting-edge LAMP stack, based on Ubuntu 16.04 LTS. Includes .htaccess support and popular PHP7 features, including composer and mail() function." \
+      org.label-schema.name="Development Web Server Stack" \
+      org.label-schema.description="Cutting-edge Web stack, based on Ubuntu 16.04 LTS. Includes .htaccess support and popular PHP7 features, including composer and mail() function." \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.vcs-url="https://github.com/unixelias/docker-lamp" \
       org.label-schema.vendor="Elias Alves at UFVJM" \
-      org.label-schema.version="16.04" \
+      org.label-schema.version=${VCS_BRANCH} \
       org.label-schema.version="0.1" \
       org.label-schema.version="dev" \
       org.label-schema.schema-version="1.0" \
-      org.label-schema.docker.cmd="docker run -d -p [HOST WWW PORT NUMBER]:80 -p [HOST DB PORT NUMBER]:3306 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql unixelias/lamp"
+      org.label-schema.docker.cmd="docker run -d -p [HOST WWW PORT NUMBER]:80 -p [HOST DB PORT NUMBER]:443 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql unixelias/lamp"
 
 
 COPY Dockerfile /root/buildinfo
@@ -59,7 +60,6 @@ RUN apt-get update \
 	ftp \
 	php7.0 \
 	libapache2-mod-php7.0 \
-	nodejs \
 	npm \
 	postfix \
 	php7.0-bz2 \
@@ -106,9 +106,9 @@ ENV TERM dumb
 
 COPY ./scripts/index.php /var/www/html/
 COPY ./scripts/run-lamp.sh /usr/sbin/
+COPY ./root/ ~/
 
 RUN a2enmod rewrite
-RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN chmod +x /usr/sbin/run-lamp.sh
 RUN chown -R www-data:www-data /var/www/html
 
@@ -117,6 +117,5 @@ VOLUME /var/log/httpd
 
 EXPOSE 80
 EXPOSE 443
-EXPOSE 3000
 
 CMD ["/usr/sbin/run-lamp.sh"]
