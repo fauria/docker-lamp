@@ -1,28 +1,63 @@
 version: '2'
 services:
   db:
-    image: mysql:latest
-    hostname: db
+   build: ./db
+   hostname: db
+   environment:
+     - MYSQL_ROOT_PASSWORD=my-secret-pw
+     - MYSQL_USER=usuario
+     - MYSQL_PASSWORD=user-secret-pw
+   ports:
+     - 3306:3306
+   volumes:
+     - db_data:/var/lib/mysql
+     - ./code/dump:/docker-entrypoint-initdb.d
+
+  node:
+    image: "node:carbon"
+    working_dir: /home/node/app
     environment:
-      - MYSQL_ROOT_PASSWORD=my-secret-pw
+      - NODE_ENV=production
     volumes:
-      - db_data:/var/lib/mysql
-      - ./dump:/docker-entrypoint-initdb.d
+      - ./code/app:/home/node/app
+    ports:
+      - 3000:3000
+    depends_on:
+     - mongodb
+     - db
+    command: "npm start"
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+      - ./code/scripts/mongod.conf:/etc/init/mongod.conf
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=my-admin-pw
+
   web:
-    image: unixelias/lamp
+    image: unixelias/lamp:demo
+    hostname: web
     ports:
       - 80:80
+      - 443:443
     environment:
       - LOG_STDOUT=true
       - LOG_STDERR=true
       - LOG_LEVEL=debug
     volumes:
-      - ~/workspace:/var/www/html
+      - ./code/www:/var/www/html
     depends_on:
-      - db
+     - db
+     - node
+     - mongodb
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    hostname: phpmyadmin
     volumes:
       - phpmyadmin_data:/sessions
     ports:
@@ -37,3 +72,4 @@ services:
 volumes:
   db_data:
   phpmyadmin_data:
+  mongo-data:
