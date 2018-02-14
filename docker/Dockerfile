@@ -42,7 +42,7 @@ RUN apt-get update \
     unzip \
     vim \
     xz-utils \
-    && locale-gen pt en es \
+    && locale-gen pt \
     && echo "pt_BR pt_BR.UTF-8" >> /etc/locale.alias \
     && unlink /etc/localtime \
     && ln -s /usr/share/zoneinfo/Brazil/East /etc/localtime \
@@ -54,7 +54,7 @@ ENV LANG='pt_BR.UTF-8' LANGUAGE='pt_BR:pt:en' LC_ALL='pt_BR.UTF-8'
 
 RUN apt-get update \
 	&& apt-get upgrade -y \
-	&& apt-get install -y \
+	&& apt-get install -y --no-install-recommends \
 	apache2 \
 	composer \
 	ftp \
@@ -109,6 +109,7 @@ COPY ./scripts/run-lamp.sh /usr/sbin/
 COPY ./root/ ~/
 
 RUN a2enmod rewrite
+RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN chmod +x /usr/sbin/run-lamp.sh
 RUN chown -R www-data:www-data /var/www/html
 
