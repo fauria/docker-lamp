@@ -11,7 +11,7 @@ services:
      - 3306:3306
    volumes:
      - db_data:/var/lib/mysql
-     - ./demo/dump:/docker-entrypoint-initdb.d
+     - ./code/dump:/docker-entrypoint-initdb.d
 
   node:
     image: "node:carbon"
@@ -19,13 +19,27 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
-      - ./demo/app:/home/node/app
+      - ./code/app:/home/node/app
     ports:
       - 3000:3000
+    depends_on:
+     - mongodb
+     - db
     command: "npm start"
 
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+      - ./code/scripts/mongod.conf:/etc/init/mongod.conf
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=my-admin-pw
+
   web:
-    image: unixelias/lamp
+    image: unixelias/lamp:demo
     hostname: web
     ports:
       - 80:80
@@ -35,10 +49,11 @@ services:
       - LOG_STDERR=true
       - LOG_LEVEL=debug
     volumes:
-      - ./demo/code:/var/www/html
+      - ./code/www:/var/www/html
     depends_on:
      - db
      - node
+     - mongodb
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -53,8 +68,8 @@ services:
       - PMA_PASSWORD=my-secret-pw
     depends_on:
       - db
-      - web
 
 volumes:
   db_data:
   phpmyadmin_data:
+  mongo-data:
