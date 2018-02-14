@@ -1,7 +1,7 @@
 version: '2'
 services:
   db:
-   image: mariadb
+   build: ./db
    hostname: db
    environment:
      - MYSQL_ROOT_PASSWORD=my-secret-pw
