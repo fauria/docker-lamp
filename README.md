@@ -124,7 +124,8 @@ The image exposes ports `80` and `3306`, and exports four volumes:
 * `/var/log/httpd`, containing Apache log files.
 * `/var/log/mysql` containing MariaDB log files.
 * `/var/www/html`, used as Apache's [DocumentRoot directory](http://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot).
-* `/var/lib/mysql`, where MariaDB data files are stores.
+* `/var/lib/mysql`, where MariaDB data files are stored.
+* `/etc/apache2`, where Apache configuration files are stored.
 
 
 The user and group owner id for the DocumentRoot directory `/var/www/html` are both 33 (`uid=33(www-data) gid=33(www-data) groups=33(www-data)`).
