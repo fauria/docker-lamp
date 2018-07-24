@@ -127,9 +127,7 @@ The image exposes ports `80` and `3306`, and exports four volumes:
 * `/var/lib/mysql`, where MariaDB data files are stored.
 * `/etc/apache2`, where Apache configuration files are stored.
 
-#### Important
-When mounting the volume `/etc/apache2`, make sure that your local folder contains all the configuration files needed for apache to start. 
-You should probably copy the config files from the container to your local filesystem before mounting this volume (`docker cp YOUR_CONTAINER:/etc/apache2 apacheConfig`), then you can make whatever changes you want to the config files, and mount the volume normally when running the container: `docker run -p 80:80 -e LOG_STDOUT=true -e LOG_STDERR=true -e LOG_LEVEL=debug -v html:/var/www/html -v apacheConfig:/etc/apache2 fauria/lamp`.
+Please, refer to https://docs.docker.com/storage/volumes for more information on using host volumes.
 
 The user and group owner id for the DocumentRoot directory `/var/www/html` are both 33 (`uid=33(www-data) gid=33(www-data) groups=33(www-data)`).
 
