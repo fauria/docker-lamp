@@ -5,5 +5,3 @@
 # https://registry.hub.docker.com/u/fauria/lamp/
 
 phpinfo();
-
-?>
