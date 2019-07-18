@@ -45,7 +45,8 @@ RUN apt-get install -y \
 	php7.0-tidy \
 	php7.0-xmlrpc \
 	php7.0-xsl \
-	php7.0-zip
+	php7.0-zip \
+	phpmyadmin
 RUN apt-get install apache2 libapache2-mod-php7.0 -y
 RUN apt-get install mariadb-common mariadb-server mariadb-client -y
 RUN apt-get install postfix -y
