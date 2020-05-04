@@ -5,6 +5,8 @@ LABEL Description="Cutting-edge LAMP stack, based on Ubuntu 16.04 LTS. Includes 
 	Usage="docker run -d -p [HOST WWW PORT NUMBER]:80 -p [HOST DB PORT NUMBER]:3306 -v [HOST WWW DOCUMENT ROOT]:/var/www/html -v [HOST DB DOCUMENT ROOT]:/var/lib/mysql fauria/lamp" \
 	Version="1.0"
 
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+
 RUN apt-get update
 RUN apt-get upgrade -y
 
