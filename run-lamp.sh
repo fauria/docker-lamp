@@ -28,6 +28,13 @@ fi
 # enable php short tags:
 /bin/sed -i "s/short_open_tag\ \=\ Off/short_open_tag\ \=\ On/g" /etc/php/7.0/apache2/php.ini
 
+# display PHP errors:
+if [ $DISPLAY_ERRORS ]; then
+    /bin/sed -i "s/display_errors\ \=\ Off/display_errors\ \=\ On/g" /etc/php/7.0/apache2/php.ini
+else
+    DISPLAY_ERRORS='No.'
+fi
+
 # stdout server info:
 if [ ! $LOG_STDOUT ]; then
 cat << EOB
@@ -46,6 +53,7 @@ cat << EOB
     · Log Level [LOG_LEVEL]: $LOG_LEVEL
     · Allow override [ALLOW_OVERRIDE]: $ALLOW_OVERRIDE
     · PHP date timezone [DATE_TIMEZONE]: $DATE_TIMEZONE
+    · PHP display errors [DISPLAY_ERRORS]: $DISPLAY_ERRORS
 
 EOB
 else
